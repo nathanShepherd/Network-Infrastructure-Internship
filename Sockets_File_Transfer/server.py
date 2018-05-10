@@ -10,19 +10,19 @@ Server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 Server.bind((host, port))
 Server.listen(5)
 
-print("Initialized server at %s : %s" % (host, port))
+print("Initialized server at %s : %s\n" % (host, port))
 filefound = False
 
 while True:
   connection, address = Server.accept()
-  print("Connected to client at:", address)
+  print("Connected to client at:", address, end='\n\n')
   
   filename = connection.recv(1024).decode('utf-8')
   for f in os.listdir('server_files/'):
     if f == filename: filefound = True
 
   if filefound:
-    print(filename, 'file found on server')
+    print(filename, 'file found on server\n')
     uploadFile = open('server_files/'+filename, 'rb')
     file_bytes = uploadFile.read(1024)
 
@@ -31,7 +31,10 @@ while True:
       file_bytes = uploadFile.read(1024)
     print("Sent file succesfully")
 
-  else: print('\n',filename, "not found on server\n")
+  else: 
+    print('\n',filename, "not found on server\n")
+    raise NameError
+
   break
 
 connection.close()
