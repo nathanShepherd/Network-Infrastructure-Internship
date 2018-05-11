@@ -24,7 +24,7 @@ def getFile(name, sock):
                     sock.send(bytesToSend)
     else: 
         # Requested file does not exist
-        #sock.send(str.encode('ERROR:\"%s\" does not exist' %s (filename) ))
+        #sock.sendall('ERROR:\"%s\" does not exist' %s (filename) )
         print('Requested file does not exist')
 
     sock.close()
@@ -50,4 +50,4 @@ if __name__ == '__main__':
 
     s.close()
     
-
+#?
