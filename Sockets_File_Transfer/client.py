@@ -6,7 +6,8 @@ import time
 import socket
 
 
-host = 'localhost'; port = 5555
+#host = 'localhost'; port = 5555
+host = '0.0.0.0'; port = 60600
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((host, port))
 

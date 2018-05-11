@@ -5,7 +5,7 @@ import os
 import sys
 import socket
 
-host = 'localhost'; port = 5555
+host = '0.0.0.0'; port = 60600
 Server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 Server.bind((host, port))
 Server.listen(5)
@@ -18,12 +18,12 @@ while True:
   print("Connected to client at:", address, end='\n\n')
   
   filename = connection.recv(1024).decode('utf-8')
-  for f in os.listdir('server_files/'):
+  for f in os.listdir('files/'):
     if f == filename: filefound = True
 
   if filefound:
     print(filename, 'file found on server\n')
-    uploadFile = open('server_files/'+filename, 'rb')
+    uploadFile = open('files/'+filename, 'rb')
     file_bytes = uploadFile.read(1024)
 
     while file_bytes:
