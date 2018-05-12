@@ -13,6 +13,7 @@
 import threading
 import socket
 import glob
+import os
 
 class Endpoint():
   def __init__(self, connection, address):
@@ -41,28 +42,34 @@ class Endpoint():
 
     if 'FILES' in clnt_auth:
       file_ptr, num_sent = 0, 0
-      num_files = clnt_auth[-1]
-      files = glob.glob('./files/*.txt')
-      max_files = len(glob.glob('./files/*.txt'))
+      num_files = int(clnt_auth[-1])
+      files = glob.glob('files/*.txt')
+      max_files = len(glob.glob('./files/*.txt')) 
       
-      
-      while num_sent <= max_files or num_sent != num_files:
+      while file_ptr <= max_files and num_sent < num_files:
+          print('Client status:', self.connection.recv(1024).decode())
           filename = files[file_ptr]
+          fileSize = str(os.path.getsize(filename))
 
           if filename.endswith('.txt'):
+            print('sending', filename, fileSize, 'to client')
             # Send filename to client
-            self.connection.send(str.encode(filename))
-            
+            self.connection.send(str.encode(filename +' ' +fileSize))
+            print('Sent filename to client')
+
             # Begin File Upload
             with open(filename, 'rb') as f:
               bytesToSend = f.read(1024)
               self.connection.send(bytesToSend)
-              while bytesToSend != "":
+              #print('sent', bytesToSend, 'to client')
+              while bytesToSend:
+                #print('In Loop')
                 bytesToSend = f.read(1024)
                 self.connection.send(bytesToSend)
 
             num_sent += 1
             print('Sent %s of %s files to client'% (num_sent, num_files))
+          #self.connection.close()
 
           file_ptr += 1
       print('Completed File Upload to client\n=====================')
@@ -92,15 +99,6 @@ class Server:
       print("Client connected at",  (addr))
       clnt = Endpoint(clientSocket, addr); clnt.config()
       self.clientele.append(clnt)
-      
-      clnt_auth = clientSocket.recv(1024).decode().split(' ')
-      print("Client says:", clnt_auth)
-      if 'FILES' in clnt_auth:
-        num_files = clnt_auth[-1]
-        
-        
-         
-      
 
 if __name__ == "__main__":
   Daemon = Server(host= 'localhost',

@@ -22,26 +22,28 @@ class Client:
       for f in range(int(num_files)):
         confirmation_to_server = b'OK'
         self.socket.send(confirmation_to_server)
-        filename = self.socket.recv(1024).decode().split('/')[-1]
+        file_info = self.socket.recv(1024).decode()
+        fileSize = int(file_info.split(' ')[-1])
+        filename = file_info.split(' ')[0].split('/')[-1]
 
         # Initialize file to be compiled locally
-        f = open('new_' + filename, 'wb')
-        print("\nCompiling file locally: new_" + filename)
-        print("[", end="")
+        with open('new_' + filename, 'wb') as f:
+          print("\nCompiling file locally: new_" + filename +' '+str(fileSize))
         
-        # Receive first batch of file information
-        data = self.socket.recv(1024)
-        total_recv = len(data)
-        f.write(data)
-
-        # Iteratively build the file until no data received
-        while data:
-          print("=", end="")
+          # Receive first batch of file information
           data = self.socket.recv(1024)
-          total_recv += len(data)
+          total_recv = len(data)
           f.write(data)
+          #print("Received", data, "from Server")
 
-        print(']\nDownload Complete!')
+          # Iteratively build the file until no data received
+          while data and total_recv < fileSize:
+            data = self.socket.recv(1024)
+            total_recv += len(data)
+            f.write(data)
+          print('Received', total_recv, 'bytes') 
+
+          print('\nDownload Complete!')
 
     else: print("\nError authenticating with server")
 
