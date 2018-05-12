@@ -7,4 +7,4 @@ from client import Client
 
 if __name__ == "__main__":
   client = Client()
-  client.send_msg("Hello!") 
+  client.request_files(3)

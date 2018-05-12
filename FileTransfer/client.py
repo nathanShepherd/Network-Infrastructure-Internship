@@ -69,5 +69,5 @@ class Client:
 
 if __name__ == "__main__":
   client = Client()
-  client.request_files(20)
+  client.request_files(10)
   #client.send_msg("Hello!")
