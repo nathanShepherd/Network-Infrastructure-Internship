@@ -25,7 +25,7 @@ class Endpoint():
     # Add support for FTP FileTransfer
     # Add supoort for asynchronous file transfer
     if method == 'FTP':
-      self.start_thread(self.fileTransfer(3))
+      self.start_thread(self.fileTransfer())
     
     if method == 'TCP': 
       self.start_thread(self.sendString(self.address))
@@ -34,17 +34,23 @@ class Endpoint():
     self.thread = threading.Thread(target=target)
     self.thread.start()
 
-  def fileTransfer(self, num_files):
+  '''   Client decides num_files to download from server     '''
+  '''Server uploads min(available_files, num_files) to client'''
+  def fileTransfer(self):
     # Authentication protocol with client
     clnt_auth = self.connection.recv(1024).decode().split(' ')
+    if clnt_auth=='': print('Client authentication error')
+    print("Client status:", clnt_auth)
+
+    max_files = len(glob.glob('./files/*.txt')) 
+    num_files = int(clnt_auth[-1])
+
+    num_files = min(num_files, max_files)
     self.connection.send(str.encode('GOOD '+ str(num_files)))
-    print("Client says:", clnt_auth)
 
     if 'FILES' in clnt_auth:
       file_ptr, num_sent = 0, 0
-      num_files = int(clnt_auth[-1])
       files = glob.glob('files/*.txt')
-      max_files = len(glob.glob('./files/*.txt')) 
       
       while file_ptr <= max_files and num_sent < num_files:
           print('Client status:', self.connection.recv(1024).decode())
@@ -53,9 +59,10 @@ class Endpoint():
 
           if filename.endswith('.txt'):
             print('sending', filename, fileSize, 'to client')
+            
             # Send filename to client
             self.connection.send(str.encode(filename +' ' +fileSize))
-            print('Sent filename to client')
+            #print('Sent filename to client')
 
             # Begin File Upload
             with open(filename, 'rb') as f:
@@ -68,11 +75,12 @@ class Endpoint():
                 self.connection.send(bytesToSend)
 
             num_sent += 1
-            print('Sent %s of %s files to client'% (num_sent, num_files))
+            print('Sent %s of %s files to client\n'% (num_sent, num_files))
           #self.connection.close()
 
           file_ptr += 1
-      print('Completed File Upload to client\n=====================')
+      print('Completed File Upload to client')
+      print('===============================')
     
 
   def sendString(self, addr):
@@ -85,14 +93,15 @@ class Endpoint():
 class Server:
   def __init__(self, host='localhost', port=6438):
     self.serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print ('Initializing server at:', host, port)
+    print ('\nInitializing server at:', host, port)
     self.serverSocket.bind((host, port))
 
     self.clientele = []
 
   def listen(self, max_clients=5):
     self.serverSocket.listen(max_clients)                                        
-    print ('Server started and ready to communicate with client(s)')
+    print('Server started and ready to communicate with client(s)')
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 
     while True:
       clientSocket, addr = self.serverSocket.accept()

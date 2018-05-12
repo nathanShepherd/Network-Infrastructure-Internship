@@ -2,7 +2,7 @@
 # Developed by Nathan Shepherd
 
 import socket
-
+import time
 
 class Client:
   def __init__(self, host='localhost', port= 8888):
@@ -17,7 +17,8 @@ class Client:
     resp = self.socket.recv(1024).decode().split(' ')
 
     if resp[0] == 'GOOD':
-      print('Starting download of %s files'% resp[1])
+      print('\nStarting download of %s files'% resp[1])
+      num_files = resp[1]# upper bounded by num files on server
 
       for f in range(int(num_files)):
         confirmation_to_server = b'OK'
@@ -25,25 +26,33 @@ class Client:
         file_info = self.socket.recv(1024).decode()
         fileSize = int(file_info.split(' ')[-1])
         filename = file_info.split(' ')[0].split('/')[-1]
+        
+        start = time.time()
 
         # Initialize file to be compiled locally
         with open('new_' + filename, 'wb') as f:
-          print("\nCompiling file locally: new_" + filename +' '+str(fileSize))
+          print("\nCompiling file locally: new_" + filename)
         
           # Receive first batch of file information
           data = self.socket.recv(1024)
           total_recv = len(data)
+          print('[', end='')
           f.write(data)
           #print("Received", data, "from Server")
 
           # Iteratively build the file until no data received
           while data and total_recv < fileSize:
+            if int(total_recv*100/fileSize) % 50 == 0:
+              print('==', end='')
             data = self.socket.recv(1024)
             total_recv += len(data)
             f.write(data)
+          print(']')
+          
+          download_speed = round((time.time() - start)*1000, 3)
+          print('DownTime', download_speed, 'milliseconds')
           print('Received', total_recv, 'bytes') 
-
-          print('\nDownload Complete!')
+          print('Download Complete!')
 
     else: print("\nError authenticating with server")
 
@@ -60,5 +69,5 @@ class Client:
 
 if __name__ == "__main__":
   client = Client()
-  client.request_files(3)
+  client.request_files(20)
   #client.send_msg("Hello!")
