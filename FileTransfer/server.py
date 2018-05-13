@@ -85,6 +85,8 @@ class Endpoint():
           # 8. Client reconfigures File locally with respect to enumeration
 
           # Configure Pivot endpoints
+          # Try using UDP protocol to speed up file transfer rate
+          # TCP vs. UDP @ https://bit.ly/2IBROnW
 
           # Enumerate file bytes into a list
           # Send dict of ordinality:bytes to client via Pivots in parallel
