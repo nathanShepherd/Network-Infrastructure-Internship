@@ -25,14 +25,25 @@ class Endpoint():
     self.thread.start()
 
   def config(self, method='TCP'):
-    # Use typing to determine the type of endpoint
-
+    # Use typing to determine which endpoint to configure
 
     if method == 'TCP':# Using FTP Protocol
       self.start_thread(self.fileTransfer())
 
     if method == 'GridFTP':# Using distributed TCP implimentation
       self.start_thread(self.asynchronousFileTransfer())
+
+    if method == 'Pivot':
+      self.start_thread(self.pivot())
+  
+  def pivot(self):
+    # 1. Configure endpoints and connect each to Server    
+    # 2. Each endpoint starts listening for connections
+    client_host, client_port = self.address
+    client_connection = self.connection
+
+    # Copy the protocol for self.fileTransfer
+    # Adapt pivot to send enumerated bytes to client
 
   def asynchronousFileTransfer(self):
     # Authentication protocol with client
@@ -44,7 +55,7 @@ class Endpoint():
     num_files = int(clnt_auth[-1])
 
     num_files = min(num_files, max_files)
-    self.connection.send(str.encode('GOOD ' + str(num_files)))
+    self.connection.send(str.encode('GOOD '+str(num_files)+' GridFTP'))
 
     if 'FILES' in clnt_auth:
       file_ptr, num_sent = 0, 0
@@ -57,20 +68,43 @@ class Endpoint():
 
         if filename.endswith('.txt'):
           print('\nSending', filename, fileSize, 'to client')
-
-          # Send filename to client
-          self.connection.send(str.encode(filename + ' ' + fileSize))
+          # Send filename, fileSize to client
+          self.connection.send(str.encode(filename+' '+fileSize))
           # print('Sent filename to client')
+          
+          ############################################
+          # %%% Asynchronous File Transfer Protocol %%%
+          # 0. Setup a Client and Server connected via Sockets
+          # 1. Configure endpoints and connect each to Server
+          # 2. Each endpoint starts listening for connections
+          # 3. Server sends IPs and Ports of endpoints to Client
+          # 4. Client connects to all endpoints
+          # 5. Server distributes the file into buckets
+          # 6. Each bucket of the file is enumerated
+          # 7. File buckets are sent in parralel to Client via endpoints
+          # 8. Client reconfigures File locally with respect to enumeration
+
+          # Configure Pivot endpoints
+
+          # Enumerate file bytes into a list
+          # Send dict of ordinality:bytes to client via Pivots in parallel
 
           # Begin File Upload
+          steps = 0; bytesSent = 0
           with open(filename, 'rb') as f:
             bytesToSend = f.read(1024)
+            bytesSent += len(bytesToSend)
             self.connection.send(bytesToSend)
+            steps += 1
+
             # print('sent', bytesToSend, 'to client')
             while bytesToSend:
-              # print('In Loop')
+              steps += 1
               bytesToSend = f.read(1024)
+              bytesSent += len(bytesToSend)
               self.connection.send(bytesToSend)
+
+          print(steps, 'steps to send', bytesSent, 'bytes')
 
           num_sent += 1
           print('Sent %s of %s files to client\n' % (num_sent, num_files))
@@ -92,7 +126,7 @@ class Endpoint():
     num_files = int(clnt_auth[-1])
 
     num_files = min(num_files, max_files)
-    self.connection.send(str.encode('GOOD '+ str(num_files)))
+    self.connection.send(str.encode('GOOD '+ str(num_files) + 'FTP'))
 
     if 'FILES' in clnt_auth:
       file_ptr, num_sent = 0, 0
@@ -104,10 +138,11 @@ class Endpoint():
           fileSize = str(os.path.getsize(filename))
 
           if filename.endswith('.txt'):
-            print('sending', filename, fileSize, 'to client')
+
+            print('\nSending', filename, fileSize,'to client')
             
             # Send filename to client
-            self.connection.send(str.encode(filename +' ' +fileSize))
+            self.connection.send(str.encode(filename +' '+fileSize))
             #print('Sent filename to client')
 
             # Begin File Upload
@@ -152,7 +187,7 @@ class Server:
     while True:
       clientSocket, addr = self.serverSocket.accept()
       print("Client connected at",  (addr))
-      print("Using transfer protocol [%s]"% transfer_protocol)
+      print("Using transfer protocol \'%s\']"% transfer_protocol)
       clnt = Endpoint(clientSocket, addr)
       clnt.config(transfer_protocol)
       self.clientele.append(clnt)
