@@ -113,6 +113,7 @@ class Client:
   def __del__(self): self.socket.close()
 
 if __name__ == "__main__":
-  client = Client()
+  client = Client( host='172.16.3.233', 
+                   port= 8888)
   client.request_files(8)
   #client.send_msg("Hello!")
