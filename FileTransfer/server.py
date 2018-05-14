@@ -195,7 +195,7 @@ class Server:
       self.clientele.append(clnt)
 
 if __name__ == "__main__":
-  Daemon = Server(host= 'localhost',
+  Daemon = Server(host= '172.16.3.233',
                   port= 8888 )
   Daemon.listen(transfer_protocol='GridFTP')
 
