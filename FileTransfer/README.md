@@ -4,11 +4,11 @@
 ```
 Daemon = Server(host= 'localhost',
                 port= 8888 )
-
+``````
 Daemon.listen(transfer_protocol='GridFTP')
 ```
 
-### How to connect to server as a *local* client:
+### How to connect to Server as a *local* Client:
 ```
 client = Client( host='localhost', 
                    port= 8888)
@@ -18,3 +18,22 @@ client = Client( host='localhost',
 ```
 client.request_files(3)
 ```
+--> Compiling file locally: new_html_(4th_copy).txt
+--> [========================================]
+--> DownTime 41.519 milliseconds
+--> Received 1063074 bytes
+--> Download Complete!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
