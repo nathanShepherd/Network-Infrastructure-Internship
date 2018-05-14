@@ -1,5 +1,5 @@
-# NetworkingTests
-Implement basic Networking Archetypes in Python
+# Network Infrastructure Internship
+Implement Networking Archetypes for the improvement of the University of Michigan's Network Infrastructure
 
 ## Globus Wrapper
 Provides a wrapper protocol for the Globus SDK/API/CLI
