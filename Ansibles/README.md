@@ -13,6 +13,11 @@ $ cd ansible-role-NEW_ROLE
 $ ansible-galaxy init
 ```
 
+### Ping Localhost!!!
+```
+ansible localhost -m ping -e 'ansible_python_interpreter="/usr/bin/env python"'
+```
+
 ### Get Ansible role from galaxy.ansible.com
 ```
 Install @ /etc/ansible/roles
