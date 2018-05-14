@@ -1,0 +1,5 @@
+# test.yml
+# test playbook
+- hosts: example
+  roles:
+  - { role: acme }
