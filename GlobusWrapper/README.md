@@ -22,9 +22,8 @@ globus ls 4c8d7b04-5783-11e8-9101-0a6d4e044368
 ```
 
 ### Transfer some data, first using Globus Tutorial Endpoints
-create an alias for tutorial endpoints: 
+create an alias for tutorial endpoint: 
 ```
-go1=ddb59aef-6d04-11e5-ba46-22000b92c6ec
 go2=ddb59af0-6d04-11e5-ba46-22000b92c6ec
 ```
 or search for them using:
@@ -32,9 +31,8 @@ or search for them using:
 globus endpoint search tutorial
 ```
 
-#### Activate "globus tutorial endpoint (1 and 2)"
+#### Activate "globus tutorial endpoint"
 ```
-globus endpoint activate $go1
 globus endpoint activate $go2
 ```
 
