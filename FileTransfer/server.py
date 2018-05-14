@@ -118,7 +118,7 @@ class Endpoint():
   
   '''   Client decides num_files to download from server     '''
   '''Server uploads min(available_files, num_files) to client'''
-  def fileTransfer(self):
+  def fileTransfer(self):# Using FTP protocol
     # Authentication protocol with client
     clnt_auth = self.connection.recv(1024).decode().split(' ')
     if clnt_auth=='': print('Client authentication error')
