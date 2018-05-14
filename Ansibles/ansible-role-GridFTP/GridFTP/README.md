@@ -1,4 +1,4 @@
-Role Name
+Grid FTP
 =========
 
 Quickly deploy a GridFTP Endpoint on a Linux machine
