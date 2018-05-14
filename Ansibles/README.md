@@ -6,6 +6,13 @@ Roles allow more than just tasks to be packaged together and can include variabl
 sudo yum install ansible
 ```
 
+### Initialize a New Role
+```
+$ mkdir ansible-role-NEW_ROLE
+$ cd ansible-role-NEW_ROLE
+$ ansible-galaxy init
+```
+
 ### Get Ansible role from galaxy.ansible.com
 ```
 Install @ /etc/ansible/roles
@@ -15,9 +22,6 @@ Install @ localDir
 $ ansible-galaxy install --roles-path . username.rolename
 ```
 
-### Or Initialize a New Role
-```
-$ mkdir ansible-role-NEW_ROLE
-$ cd ansible-role-NEW_ROLE
-$ ansible-galaxy init
-```
+
+
+
