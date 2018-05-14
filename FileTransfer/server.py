@@ -186,16 +186,28 @@ class Server:
     print('Server started and ready to communicate with client(s)')
     print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
 
-    while True:
-      clientSocket, addr = self.serverSocket.accept()
-      print("Client connected at",  (addr))
-      print("Using transfer protocol \'%s\']"% transfer_protocol)
-      clnt = Endpoint(clientSocket, addr)
-      clnt.config(transfer_protocol)
-      self.clientele.append(clnt)
+    if transfer_protocol == 'TCP':
+      while True:
+        clientSocket, addr = self.serverSocket.accept()
+        print("Client connected at",  (addr))
+        print("Using transfer protocol \'%s\'"% transfer_protocol)
+        clnt = Endpoint(clientSocket, addr)
+        clnt.config(transfer_protocol)
+        self.clientele.append(clnt)
+    
+    elif transfer_protocol == 'GridFTP':
+      while True:
+        clientSocket, host__port = self.serverSocket.accept()
+        print("Client connected at", host__port)
+        print('Using transfer protocol \'%s\''% transfer_protocol)
+        
+        clnt = Endpoint(clientSocket, host__port)
+        clnt.config(transfer_protocol)
+        self.clientele.append(clnt)
+        
 
 if __name__ == "__main__":
-  Daemon = Server(host= '172.16.3.233',
+  Daemon = Server(host= 'localhost',
                   port= 8888 )
   Daemon.listen(transfer_protocol='GridFTP')
 
