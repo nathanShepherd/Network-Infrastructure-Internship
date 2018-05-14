@@ -1,4 +1,4 @@
-## Configure Server and Client for Globus GridFTP
+# Configure Server and Client for Globus GridFTP
 
 ## Following Setup Tutorial from JASMIN @ https://bit.ly/2jTSk2A
 #### After configuring local endpoint, search for local endpoints
