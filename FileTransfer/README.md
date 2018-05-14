@@ -19,12 +19,15 @@ client = Client( host='localhost',
 ```
 client.request_files(3)
 ```
---> Compiling file locally: new_html_(4th_copy).txt
---> [========================================]
---> DownTime 41.519 milliseconds
---> Received 1063074 bytes
---> Download Complete!
 
+######Incanting above command results in the following log printing to terminal:
+```
+Compiling file locally: new_html_(4th_copy).txt
+[========================================]
+DownTime 41.519 milliseconds
+Received 1063074 bytes
+Download Complete!
+```
 
 
 
