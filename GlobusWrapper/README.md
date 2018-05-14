@@ -1,6 +1,12 @@
 # Configure Server and Client for Globus GridFTP
 
 ## Following Setup Tutorial from JASMIN @ https://bit.ly/2jTSk2A
+Set up Globus CLI on end-user machine @ https://docs.globus.org/cli/installation/ (essentially pip install, then set PATH)
+```
+globus login
+```
+Copy & paste resulting URL to browser, obtain Authorization code and enter this at the command line where you did “globus login”. You are now able to log in from this particular Globus CLI instance.
+
 #### After configuring local endpoint, search for local endpoints
  ```
 globus endpoint search --filter-scope my-endpoints
