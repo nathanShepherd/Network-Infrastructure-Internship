@@ -1,10 +1,4 @@
 ## Configure Server and Client for Globus GridFTP
-### Using ESNET *wrapper* @ https://bit.ly/2IFapiZ
-```
-# copy file /etc/group
- globus-url-copy sshftp://gridhost.foo.gov/etc/group file:/tmp/group
-``` 
-Results in *end-of-file* error for all commands ...
 
 ## Following Setup Tutorial from JASMIN @ https://bit.ly/2jTSk2A
 #### After configuring local endpoint, search for local endpoints
