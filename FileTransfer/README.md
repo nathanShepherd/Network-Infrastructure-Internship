@@ -21,7 +21,7 @@ client = Client( host= 'localhost',
 client.request_files(3)
 ```
 
-Incanting above command results in the following log printing to terminal:
+Executing the above command results in the following log printing to the client-side terminal:
 ```
 Compiling file locally: new_html.txt
 [========================================]
