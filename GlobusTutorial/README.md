@@ -3,6 +3,16 @@
 ## Following Setup Tutorial from JASMIN @ https://bit.ly/2jTSk2A
 Set up Globus CLI on end-user machine @ https://docs.globus.org/cli/installation/ (essentially pip install, then set PATH)
 ```
+pip install --upgrade --user globus-cli
+
+```
+Authenticate local endpoint
+```
+globus login
+```
+Copy & paste resulting URL to browser, obtain Authorization code and enter this at the command line where you did “globus login”. You are now able to log in from this particular Globus CLI instance.
+
+```
 wget https://s3.amazonaws.com/connect.globusonline.org/linux/stable/globusconnectpersonal-latest.tgz
 
 tar xzf globusconnectpersonal-latest.tgz
@@ -14,9 +24,7 @@ globus endpoint create --personal my-linux-laptop
 # Use the setup key generated from "endpoint create" above
 ./globusconnectpersonal -setup 224532bb-8a4b-4d32-8995-e1fb442be98e
 
-globus login
 ```
-Copy & paste resulting URL to browser, obtain Authorization code and enter this at the command line where you did “globus login”. You are now able to log in from this particular Globus CLI instance.
 
 #### After configuring local endpoint, search for local endpoints
  ```
