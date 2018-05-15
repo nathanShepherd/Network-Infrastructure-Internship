@@ -67,3 +67,7 @@ globus endpoint search --filter-scope my-endpoints
 localE=4c8d7b04-5783-11e8-9101-0a6d4e044368 #local Endpoint ID
 globus transfer -r $localE:/test.txt $go2:/
 ```
+Endpoints can easily be deleted
+```
+globus endpoint delete [OPTIONS] ENDPOINT_ID
+```
