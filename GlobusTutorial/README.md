@@ -35,13 +35,8 @@ python --version
 ln -s /usr/bin/python /usr/local/bin/python2
 ```
 
-#### After configuring local endpoint, search for local endpoints
- ```
-globus endpoint search --filter-scope my-endpoints
-```
 #### Start Globus Connect Personal
 ```
-cd globusconnectpersonal-2.3.5
 ./globusconnectpersonal -start &
 ```
 #### List directory contents on local endpoint as a test
@@ -63,7 +58,10 @@ globus endpoint search tutorial
 ```
 globus endpoint activate $go2
 ```
-
+#### Locate a local Endpoint
+```
+globus endpoint search --filter-scope my-endpoints
+```
 #### Transfer file from local dir to tutorial endpoint
 ```
 localE=4c8d7b04-5783-11e8-9101-0a6d4e044368 #local Endpoint ID
