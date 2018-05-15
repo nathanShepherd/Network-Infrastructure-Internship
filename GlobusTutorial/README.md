@@ -1,6 +1,6 @@
 # Configure Server and Client for Globus GridFTP
 
-## Following Setup Tutorial from JASMIN @ https://bit.ly/2jTSk2A
+## Full Tutorial with most peices from JASMIN @ https://bit.ly/2jTSk2A
 #### Set up Globus CLI on end-user machine
 ```
 pip install --upgrade --user globus-cli
@@ -14,7 +14,7 @@ Copy & paste resulting URL to browser, obtain Authorization code and enter this 
 
 #### Initialize local endpoint
 ```
-wget https://s3.amazonaws.com/connect.globusonline.org/linux/stable/globusconnectpersonal-latest.tgz
+wget https://bit.ly/2Kkk9wn
 
 tar xzf globusconnectpersonal-latest.tgz
 
