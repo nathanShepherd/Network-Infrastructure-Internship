@@ -14,11 +14,11 @@ Copy & paste resulting URL to browser, obtain Authorization code and enter this 
 
 #### Initialize local endpoint
 ```
-wget https://bit.ly/2Kkk9wn
+wget https://s3.amazonaws.com/connect.globusonline.org/linux/stable/globusconnectpersonal-latest.tgz
 
 tar xzf globusconnectpersonal-latest.tgz
 
-cd globusconnectpersonal-x.y.z # Replace x.y.z to the version downloaded
+cd globusconnectpersonal-x.y.z # x.y.z --> the version downloaded
 
 globus endpoint create --personal my-linux-laptop
 
