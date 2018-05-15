@@ -1,17 +1,18 @@
 # Configure Server and Client for Globus GridFTP
 
 ## Following Setup Tutorial from JASMIN @ https://bit.ly/2jTSk2A
-Set up Globus CLI on end-user machine @ https://docs.globus.org/cli/installation/ (essentially pip install, then set PATH)
+#### Set up Globus CLI on end-user machine
 ```
 pip install --upgrade --user globus-cli
 
 ```
-Authenticate local endpoint
+#### Authenticate local endpoint
 ```
 globus login
 ```
 Copy & paste resulting URL to browser, obtain Authorization code and enter this at the command line where you did “globus login”. You are now able to log in from this particular Globus CLI instance.
 
+#### Initialize local endpoint
 ```
 wget https://s3.amazonaws.com/connect.globusonline.org/linux/stable/globusconnectpersonal-latest.tgz
 
@@ -24,6 +25,14 @@ globus endpoint create --personal my-linux-laptop
 # Use the setup key generated from "endpoint create" above
 ./globusconnectpersonal -setup 224532bb-8a4b-4d32-8995-e1fb442be98e
 
+```
+If setup fails due to ERROR: /usr/bin/env: python2: No such file or directory
+```
+# Confirm python2.x is installed and linked to $PATH
+python --version
+
+# Create a symbolic link
+ln -s /usr/bin/python /usr/local/bin/python2
 ```
 
 #### After configuring local endpoint, search for local endpoints
