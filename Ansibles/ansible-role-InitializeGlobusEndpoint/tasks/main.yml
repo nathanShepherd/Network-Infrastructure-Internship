@@ -2,12 +2,12 @@
 # tasks file for GridFTP
 
 - name: setup globus
-  include_tasks: StartGlobusCLI
+  include_tasks: StartGlobusCLI.yml
 
 - name: setup endpoint
-  include_tasks: Get_Start_globusconnectpersonal
+  include_tasks: Get_Start_globusconnectpersonal.yml
 
 - name: transfer local data to tutorial endpoint
   with_items: "{{ test_file_path }}"
-  include_tasks: send_data_to_tutorial_endpoint
+  include_tasks: send_data_to_tutorial_endpoint.yml
 

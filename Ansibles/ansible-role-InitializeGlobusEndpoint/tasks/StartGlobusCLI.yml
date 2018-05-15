@@ -1,0 +1,9 @@
+# Set up Globus CLI on end-user machine
+
+- name: pip install 
+  command: pip install --upgrade --user globus-cli
+
+# User must authenticate this step with the browser
+- name: authenticate local endpoint
+  command: globus login
+

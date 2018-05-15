@@ -1,0 +1,9 @@
+# Send data to tutorial endpoint using GridFTP
+
+# TODO: Save an endpoint as var for this task
+- name: search for lcoal endpoints
+  command: globus endpoint search --filter-scope my-endpoints
+
+# with localE, go2 = [LOCAL_ENDPOINT_ID, TUTORIAL_ENDPOINT_ID]
+- name: transfer file
+  command: globus transfer -r $localE:/test.txt $go2:/

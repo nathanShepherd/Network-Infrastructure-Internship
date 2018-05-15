@@ -1,0 +1,35 @@
+# Get globusconnectpersonal and setup a local endpoint
+
+- name: wget latest version
+  command: wget https://s3.amazonaws.com/connect.globusonline.org/linux/stable/globusconnectpersonal-latest.tgz
+
+- name: uncompress package
+  command: tar xzf globusconnectpersonal-latest.tgz
+
+- name: cleanup
+  command: rm globusconnectpersonal-latest.tgz
+
+# TODO: make x.y.z a variable populated after uncompression
+- name: change dir
+  command: cd globusconnectpersonal-x.y.z # x.y.z --> the version downloaded
+
+# TODO: make ENDPOINT_NAME a variable
+#       save setup key from output ... using grep?
+- name: create endpoint
+  command: globus endpoint create --personal ENDPOINT_NAME
+
+# SETUP_KEY initialized in "create endpoint" task
+- name: setup endpoint
+  command: ./globusconnectpersonal -setup SETUP_KEY
+
+# TODO: Save output as a variable -> PythonVersion
+- name: confirm python installed and linked to $PATH
+  command: python --version
+
+- name: create symbolic link
+  command: ln -s /usr/bin/python /usr/local/bin/python2
+  when: python2 is not in PATH
+
+- name: start globus connect personal
+  command: ./globusconnectpersonal -start &
+
