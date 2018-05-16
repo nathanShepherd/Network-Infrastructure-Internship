@@ -1,0 +1,7 @@
+---
+- name: Install globus, globusconnectpersonal, and setup an endpoint on host
+  hosts: linux-laptop
+  remote_user: root
+
+  roles:
+    - InitializeGlobusEndpoint
