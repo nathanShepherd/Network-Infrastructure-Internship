@@ -96,7 +96,6 @@ globus
 sudo curl -LOs https://downloads.globus.org/toolkit/globus-connect-server/globus-connect-server-repo-latest.noarch.rpm
 sudo rpm --import https://downloads.globus.org/toolkit/gt6/stable/repo/rpm/RPM-GPG-KEY-Globus
 sudo yum install globus-connect-server-repo-latest.noarch.rpm
-
 ```
 
 #### Install EPEL repository and Prerequisite packages
@@ -117,7 +116,6 @@ Before creating your Globus server endpoint, choose a suitable second part for y
 [Endpoint]
 Name = umich_network_infrastructure
 Public = True
-
 ```
 After editing config file, run
 ```
