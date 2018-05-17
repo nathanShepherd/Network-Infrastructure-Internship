@@ -1,7 +1,10 @@
 ---
 - name: Install globus, globusconnectpersonal, and setup an endpoint on host
-  hosts: linux-laptop
+  hosts: localhost
   remote_user: root
 
   roles:
-    - InitializeGlobusEndpoint
+    #- InitializeGlobusEndpoint
+    - ansible-gridftp
+
+#?

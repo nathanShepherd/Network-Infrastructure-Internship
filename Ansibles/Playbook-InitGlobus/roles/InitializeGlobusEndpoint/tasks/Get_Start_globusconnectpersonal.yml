@@ -9,27 +9,43 @@
 - name: cleanup
   command: rm globusconnectpersonal-latest.tgz
 
-# TODO: make x.y.z a variable populated after uncompression
-- name: change dir
-  command: cd globusconnectpersonal-x.y.z # x.y.z --> the version downloaded
-
 # TODO: make ENDPOINT_NAME a variable
-#       save setup key from output ... using grep?
 - name: create endpoint
   command: globus endpoint create --personal ENDPOINT_NAME
+  register: OUTPUT
+- debug:
+    msg: "{{ OUTPUT.stdout_lines }}"
+
+- name: format setup key
+  command: "echo {{ OUTPUT.stdout_lines[-1].split(\" \")[-1] }}"
+  register: SETUP_KEY
+- debug:
+    msg: "{{ SETUP_KEY }}"
+
+- name: find globusconnectpersonal and register location as var
+  find:
+    paths: ./
+    patterns: "globusconnectpersonal"
+    recurse: yes
+  register: gcp
+- debug:
+    msg: "{{ gcp.files[0].path }}"
 
 # SETUP_KEY initialized in "create endpoint" task
 - name: setup endpoint
-  command: ./globusconnectpersonal -setup SETUP_KEY
+  command: "{{ gcp.files[0].path }} -setup {{ SETUP_KEY }}"
+
+# Authentication handshake with Globus
 
 # TODO: Save output as a variable -> PythonVersion
-- name: confirm python installed and linked to $PATH
-  command: python --version
+#- name: confirm python installed and linked to $PATH
+#  command: python --version
+#
+#- name: create symbolic link
+#  command: ln -s /usr/bin/python /usr/local/bin/python2
+#  when: python2 is not in PATH
+#
+#- name: start globus connect personal
+#  command: ./globusconnectpersonal -start &
 
-- name: create symbolic link
-  command: ln -s /usr/bin/python /usr/local/bin/python2
-  when: python2 is not in PATH
-
-- name: start globus connect personal
-  command: ./globusconnectpersonal -start &
-
+#?
