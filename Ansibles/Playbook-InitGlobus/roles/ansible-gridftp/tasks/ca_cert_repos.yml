@@ -1,4 +1,11 @@
 ---
+# Get public Auth Key from EGI https://www.egi.eu/
+- name: EGI-trustanchors
+    baseurl: http://repository.egi.eu/sw/production/cas/1/current/
+    gpgkey: http://repository.egi.eu/sw/production/cas/1/GPG-KEY-EUGridPMA-RPM-3
+    packages:
+      - ca-policy-egi-core
+
 - name: Add {{item.name}} repository
   yum_repository: name='{{item.name}}' enabled=no description='{{item.name}}' baseurl='{{item.baseurl}}' gpgcheck={{item.gpgkey is defined and item.gpgkey != none}} gpgkey='{{item.gpgkey | default(None) or omit}}' owner=root group=root mode=0644
 

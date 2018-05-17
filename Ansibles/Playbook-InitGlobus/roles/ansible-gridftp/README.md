@@ -1,6 +1,6 @@
 GridFTP
 =======
-Note: this CentOS port was built @ https://github.com/luisico/ansible-simpleca.git
+Note: this CentOS port was built from https://github.com/luisico/ansible-gridftp.git
 
 Install GridFTP servers and clients. The role will:
 - Install globus software and dependencies as needed

@@ -1,0 +1,5 @@
+## TASK [ansible-gridftp : Install fetch-crl] ****************************************************************
+FAILED! => {"changed": true, "msg": "warning: /var/cache/yum/x86_64/7/fetch-crl/packages/fetch-crl-3.0.20-1.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 3cdbbc71: NOKEY
+
+Public key for fetch-crl-3.0.20-1.noarch.rpm is not installed
+

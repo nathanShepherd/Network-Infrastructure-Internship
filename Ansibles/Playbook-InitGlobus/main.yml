@@ -5,6 +5,7 @@
 
   roles:
     #- InitializeGlobusEndpoint
+    - ansible-simpleca
     - ansible-gridftp
 
 #?
