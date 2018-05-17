@@ -1,5 +1,5 @@
 # Install/Authenticate/Deploy Globus Endpoint
-Following Admin Install Guide @ toolkit.globus.org/toolkit/docs/latest-stable/admin/install/`
+(Following Admin Install Guide)[toolkit.globus.org/toolkit/docs/latest-stable/admin/install/]
 
 ## Prerequisites
 ```
@@ -22,16 +22,16 @@ Host credentials must:
 ### There are 2 options
 #### 1. Request a certificate from an existing CA
 ```
-http://toolkit.globus.org/toolkit/docs/latest-stable/gsic/admin/index.html#gsic-configuring
+[how-to](http://toolkit.globus.org/toolkit/docs/latest-stable/gsic/admin/index.html#gsic-configuring)
 ```
 #### 2. SimpleCA
 This wrapper around OpenSSL CA should come installed with GlobusToolkit. Otherwise, (install SimpleCA)[http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#gtadmin-simpleca]
 
-(Install SimpleCA)[http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#simpleca-admin-installing]
+[Install SimpleCA](http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#simpleca-admin-installing)
 ```
 sudo yum install globus-simple-ca globus-gsi-cert-utils-progs
 ```
-(Setup Host Credentials)[from http://grid.ncsa.illinois.edu/myproxy/fromscratch.html#simpleca_setup]
+[Setup Host Credentials](from http://grid.ncsa.illinois.edu/myproxy/fromscratch.html#simpleca_setup)
 
 Request a certificate for localhost
 ```
@@ -49,7 +49,7 @@ requests will be sent to be signed by the CA)
 
 The grid-ca-package command can be used to generate RPM, debian, or legacy GPT packages for a SimpleCA, or for any other CA which is installed on a host. These packages can make it easy to distribute the CA certificate and policy to other hosts with which you want to establish Grid trust relationships.
 ```
-(grid-ca-package)[http://toolkit.globus.org/toolkit/docs/latest-stable/simpleca/admin/index.html#grid-ca-package]
+[grid-ca-package](http://toolkit.globus.org/toolkit/docs/latest-stable/simpleca/admin/index.html#grid-ca-package)
 
 ```
 
