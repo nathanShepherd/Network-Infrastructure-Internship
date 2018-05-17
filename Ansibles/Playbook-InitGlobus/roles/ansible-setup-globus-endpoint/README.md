@@ -6,13 +6,8 @@ Following Admin Install Guide @ toolkit.globus.org/toolkit/docs/latest-stable/ad
 sudo wget http://www.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo-latest.noarch.rpm
 sudo rpm -hUv globus-toolkit-repo-latest.noarch.rpm
 ```
-For operating systems based on RHEL (such as Red Hat Enterprise Linux, CentOS, and Scientific Linux), the compatible EPEL repository must be enabled before installing myproxy. 
-```
-http://fedoraproject.org/wiki/EPEL/FAQ#How%5fcan%5fI%5finstall%5fthe%5fpackages%5ffrom%5fthe%5fEPEL%5fsoftware%5frepository.3F
 
-```
-
-## Install Globus Toolkit on Linux
+Install Auxilary packages
 ```
 sudo yum install globus-data-management-client
 ```
@@ -32,7 +27,7 @@ http://toolkit.globus.org/toolkit/docs/latest-stable/gsic/admin/index.html#gsic-
 #### 2. SimpleCA
 This wrapper around OpenSSL CA should come installed with GlobusToolkit. Otherwise, (install SimpleCA)[http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#gtadmin-simpleca]
 
-Install SimpleCA
+(Install SimpleCA)[http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#simpleca-admin-installing]
 ```
 sudo yum install globus-simple-ca globus-gsi-cert-utils-progs
 ```
@@ -55,11 +50,20 @@ requests will be sent to be signed by the CA)
 The grid-ca-package command can be used to generate RPM, debian, or legacy GPT packages for a SimpleCA, or for any other CA which is installed on a host. These packages can make it easy to distribute the CA certificate and policy to other hosts with which you want to establish Grid trust relationships.
 ```
 (grid-ca-package)[http://toolkit.globus.org/toolkit/docs/latest-stable/simpleca/admin/index.html#grid-ca-package]
+
+```
+
+Before signing, it might be good to examine the Certificate Request
+```
+# Execute @ ./home/USERNAME/.globus
+openssl req -noout -text -in usercert_request.pem 
+
 ```
 
 Sign the certificate
 ```
-grid-ca-sign -in /home/nateshep/.globus/usercert_request.pem -out hostsigned.pem
+# Execute @ ./home/USERNAME/.globus
+grid-ca-sign -in usercert_request.pem -out hostsigned.pem
 ```
 
 ### Add Authorization
@@ -72,6 +76,18 @@ You’ll need two pieces of information:
 - the local account name that the certificate holder can access.
 
 To start with, if you have created a user certificate, you can run the grid-cert-info command to get the certificate’s subject name, and id -un to get the account name:
+```
+# Execute @ ./home/USERNAME/.globus
+$ grid-cert-info -subject
+```
+STDOUT:
+/O=Grid/OU=GlobusTest/OU=simpleCA-elephant.globus.org/CN=Globus User
+```
+```
+$ id -un
+```
+STDOUT:
+globus
 
 
 
