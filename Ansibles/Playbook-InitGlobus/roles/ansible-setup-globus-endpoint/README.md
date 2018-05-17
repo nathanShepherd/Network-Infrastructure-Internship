@@ -91,6 +91,9 @@ globus
 
 
 # Alternative Install: [Globus Connect Server](https://docs.globus.org/globus-connect-server-installation-guide/)
+
+## [Open TCP Ports](https://docs.globus.org/globus-connect-server-installation-guide/#test_basic_endpoint_functionality)
+
 ## Install Globus Connect Server
 ```
 sudo curl -LOs https://downloads.globus.org/toolkit/globus-connect-server/globus-connect-server-repo-latest.noarch.rpm
@@ -132,8 +135,6 @@ If you do not see an instance of globus-gridftp-server running, then the service
 You can also verify myproxy-server Service
 ```
 ps aux | grep myproxy-server
-```
-
 ```
 
 Send data to and from endpoint using [Web Interface](https://www.globus.org/app/transfer)
