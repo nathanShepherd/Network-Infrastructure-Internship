@@ -1,4 +1,4 @@
-# How to Install, Authenticate, and Deploy a Globus Endpoint
+# Install/Authenticate and Deploy a Globus Endpoint
 # Using [Globus Connect Server](https://docs.globus.org/globus-connect-server-installation-guide/)
 
 ## [Open TCP Ports](https://docs.globus.org/globus-connect-server-installation-guide/#test_basic_endpoint_functionality)
