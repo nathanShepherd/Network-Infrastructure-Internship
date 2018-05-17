@@ -47,9 +47,9 @@ requests will be sent to be signed by the CA)
 ```
 
 The grid-ca-package command can be used to generate RPM, debian, or legacy GPT packages for a SimpleCA, or for any other CA which is installed on a host. These packages can make it easy to distribute the CA certificate and policy to other hosts with which you want to establish Grid trust relationships.
+[More info on this step](http://toolkit.globus.org/toolkit/docs/latest-stable/simpleca/admin/index.html#grid-ca-package)
 ```
-[grid-ca-package](http://toolkit.globus.org/toolkit/docs/latest-stable/simpleca/admin/index.html#grid-ca-package)
-
+grid-ca-package
 ```
 
 Before signing, it might be good to examine the Certificate Request
