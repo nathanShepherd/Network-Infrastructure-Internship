@@ -123,7 +123,7 @@ sudo globus-connect-server-setup
 ```
 When prompted, enter the Globus username and password for your [Globus organization account](https://docs.globus.org/globus-connect-server-installation-guide/#organization-account-anchor). When the globus-connect-server-setup command completes, your Globus endpoint is ready to be accessed by users with logins on your system.
 
-## Verify globus-gridftp-server Service
+## [Verify globus-gridftp-server Service](https://docs.globus.org/globus-connect-server-installation-guide/#test_basic_endpoint_functionality)
 ```
 ps aux | grep globus-gridftp-server
 ```
@@ -133,3 +133,7 @@ You can also verify myproxy-server Service
 ```
 ps aux | grep myproxy-server
 ```
+
+```
+
+Send data to and from endpoint using [Web Interface](https://www.globus.org/app/transfer)
