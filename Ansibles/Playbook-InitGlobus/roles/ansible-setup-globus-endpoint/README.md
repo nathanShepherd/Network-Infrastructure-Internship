@@ -1,8 +1,11 @@
-# Install/Authenticate/Deploy Globus Endpoint: [Globus Connect Server](https://docs.globus.org/globus-connect-server-installation-guide/)
+# How to Install, Authenticate, and Deploy a Globus Endpoint
+# Using [Globus Connect Server](https://docs.globus.org/globus-connect-server-installation-guide/)
 
 ## [Open TCP Ports](https://docs.globus.org/globus-connect-server-installation-guide/#test_basic_endpoint_functionality)
 
 ## Install Globus Connect Server
+
+#### Request latest version of software via HTTP
 ```
 sudo curl -LOs https://downloads.globus.org/toolkit/globus-connect-server/globus-connect-server-repo-latest.noarch.rpm
 sudo rpm --import https://downloads.globus.org/toolkit/gt6/stable/repo/rpm/RPM-GPG-KEY-Globus
