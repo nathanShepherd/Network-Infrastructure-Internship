@@ -1,0 +1,3 @@
+---
+- name: Restart gridftp
+  service: name=globus-gridftp-server state=restarted

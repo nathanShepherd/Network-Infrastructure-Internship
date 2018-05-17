@@ -1,0 +1,6 @@
+---
+- name: Add {{item.name}} repository
+  yum_repository: name='{{item.name}}' enabled=no description='{{item.name}}' baseurl='{{item.baseurl}}' gpgcheck={{item.gpgkey is defined and item.gpgkey != none}} gpgkey='{{item.gpgkey | default(None) or omit}}' owner=root group=root mode=0644
+
+- name: Install {{item.name}} CA certificates
+  yum: name={{item.packages}} state=latest enablerepo={{item.name}}

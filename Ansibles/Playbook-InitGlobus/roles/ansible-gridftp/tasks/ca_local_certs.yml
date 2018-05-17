@@ -1,0 +1,23 @@
+---
+- name: Drop CA {{item.name}} certificate
+  copy: dest=/etc/grid-security/certificates/{{item.name}}.pem content='{{item.cert}}' owner=root group=root mode=0644
+  when: item.cert is defined
+
+- name: Drop CA {{item.name}} certificate from file
+  copy: dest=/etc/grid-security/certificates/{{item.name}}.pem src={{item.cert_file}} owner=root group=root mode=0644
+  when: item.cert_file is defined
+
+- name: Generate {{item.name}} signing policy
+  template: dest=/etc/grid-security/certificates/{{item.name}}.signing_policy src=ca_cert.signing_policy.j2 owner=root group=root mode=0644
+
+- name: Calculate hash for CA certificate {{item.name}}
+  shell: openssl x509 -hash -noout -in /etc/grid-security/certificates/{{item.name}}.pem
+  register: hash
+  changed_when: false
+  check_mode: no
+
+- name: Set link to {{item.name}} CA certificate
+  file: path=/etc/grid-security/certificates/{{hash.stdout}}.0 src={{item.name}}.pem state=link
+
+- name: Set link to {{item.name}} signing policy
+  file: path=/etc/grid-security/certificates/{{hash.stdout}}.signing_policy src={{item.name}}.signing_policy state=link

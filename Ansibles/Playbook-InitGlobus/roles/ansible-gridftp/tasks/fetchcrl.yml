@@ -1,0 +1,15 @@
+---
+- name: Add fetch-crl repository
+  yum_repository: name=fetch-crl enabled=no description='fetch-crl' baseurl=https://dist.eugridpma.info/distribution/util/fetch-crl owner=root group=root mode=0644
+
+- name: Install fetch-crl
+  yum: name=fetch-crl state=latest enablerepo=fetch-crl
+
+- name: Configure fetch-crl
+  template: dest=/etc/fetch-crl.conf src=fetch-crl.conf.j2 owner=root group=root mode=0644
+
+- name: Enable fetch-crl services
+  service: name={{item}} state=started enabled=yes
+  with_items:
+    - fetch-crl-boot
+    - fetch-crl-cron

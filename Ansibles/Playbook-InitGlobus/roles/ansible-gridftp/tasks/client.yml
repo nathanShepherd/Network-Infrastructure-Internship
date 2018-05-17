@@ -1,0 +1,17 @@
+- name: Install packages
+  yum: name={{item}} state=latest
+  with_items:
+    - globus-gsi
+    - globus-data-management-client
+
+- name: Set environment variable for port rage
+  lineinfile: dest=/etc/environment regexp='GLOBUS_TCP_PORT_RANGE' line='GLOBUS_TCP_PORT_RANGE={{gridftp_tcp_port_range | replace("-", ",")}}'
+
+- name: Open firewall
+  firewalld: port={{item}} permanent=true state=enabled
+  with_items:
+    - '{{gridftp_tcp_port_range}}/tcp'
+  when: firewalld_st.rc == 0
+
+- include: uberftp.yml
+  when: gridftp_uberftp

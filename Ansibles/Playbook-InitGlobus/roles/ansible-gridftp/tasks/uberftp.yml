@@ -1,0 +1,6 @@
+---
+- name: Add epel repository
+  yum: name='https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm' state=present
+
+- name: Install UberFTP
+  yum: name=uberftp state=latest

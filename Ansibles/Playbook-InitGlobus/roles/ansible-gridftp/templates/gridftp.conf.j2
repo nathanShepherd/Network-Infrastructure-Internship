@@ -1,0 +1,37 @@
+# globus-gridftp-server configuration file
+
+# Environment variables
+# $GLOBUS_ERROR_VERBOSE 1
+{% if gridftp_threads > 0 %}$GLOBUS_THREAD_MODEL pthread{% endif %}
+
+# Modes of operation
+threads {{gridftp_threads}}
+
+# Authentication, authorization and security
+allow_anonymous {{gridftp_allow_anonymous | bool | int}}
+anonymous_user {{gridftp_anonymous_user}}
+
+# Logging
+log_module {{gridftp_log_module}}
+log_level {{gridftp_log_level}}
+log_single {{gridftp_log_file}}
+log_filemode {{gridftp_log_filemode}}
+disable_usage_stats {{gridftp_disable_usage_stats | bool | int}}
+
+# Network
+port {{gridftp_port}}
+port_range {{gridftp_tcp_port_range | replace("-", ",")}}
+
+# Restrict paths
+{% if gridftp_restrict_directories != [] %}
+restrict_paths {{gridftp_restrict_directories | join(',')}}
+{% endif %}
+{% if gridftp_restrict_homedirs %}
+use_home_dirs 1
+{% endif %}
+
+# Other options
+# Will override previous definitions
+{% for key, value in gridftp_options.iteritems() %}
+{{key}} {{value}}
+{% endfor %}

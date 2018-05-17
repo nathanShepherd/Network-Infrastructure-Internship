@@ -1,0 +1,22 @@
+---
+- name: Install repo package
+  yum: name={{gridftp_repo_rpm_url}} state=present
+
+- name: check if firewalld is active
+  command: service firewalld status
+  register: firewalld_st
+  ignore_errors: true
+  changed_when: false
+  check_mode: no
+
+- include: server.yml
+  when: gridftp_mode == 'server'
+
+- include: client.yml
+  when: gridftp_mode == 'client'
+
+- include: ca_cert_repos.yml
+  with_items: '{{gridftp_ca_cert_repos}}'
+
+- include: ca_local_certs.yml
+  with_items: '{{gridftp_ca_local_certs}}'

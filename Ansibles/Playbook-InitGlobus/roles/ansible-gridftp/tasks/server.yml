@@ -1,0 +1,53 @@
+---
+- name: Install packages
+  yum: name={{item}} state=latest
+  with_items:
+    - globus-gridftp
+    - globus-gsi
+    - globus-data-management-server
+
+- name: Open firewall
+  firewalld: port={{item}} permanent=true state=enabled
+  with_items:
+    - 22/tcp
+    - 2811/tcp
+    - '{{gridftp_tcp_port_range}}/tcp'
+  when: firewalld_st.rc == 0
+
+- name: Install host certificate
+  copy: content='{{gridftp_host_cert}}' dest=/etc/grid-security/hostcert.pem owner=root group=root mode=0644
+  when: gridftp_host_cert | default()
+
+- name: Install host key
+  copy: content='{{gridftp_host_key}}' dest=/etc/grid-security/hostkey.pem owner=root group=root mode=0400
+  when: gridftp_host_key | default()
+  no_log: true
+
+- name: Configure server
+  template: dest=/etc/gridftp.conf src=gridftp.conf.j2 owner=root group=root mode=0644
+  notify: Restart gridftp
+
+- name: Create /etc/gridftp.d
+  file: path=/etc/gridftp.d state=directory owner=root group=root mode=0755
+
+- name: Check if gridftp restrict directories are nfs mounted
+  command: stat --file-system --format=%T {{item}}
+  changed_when: false
+  failed_when: false
+  check_mode: no
+  with_items: '{{gridftp_restrict_directories}}'
+  register: mounts
+
+- name: Create gridftp restrict directories (unless they are nfs mounted)
+  file: path={{item.item}} owner=root group=root mode=0755 state=directory
+  with_items: '{{mounts.results}}'
+  when: item.stdout != 'nfs'
+
+- name: Enable service
+  service: name=globus-gridftp-server state=started enabled=yes
+
+- name: Update grid-mapfile
+  template: dest=/etc/grid-security/grid-mapfile src=grid-mapfile.j2 owner=root group=root mode=0644 backup=yes
+
+- include: fetchcrl.yml
+  when: gridftp_fetchcrl

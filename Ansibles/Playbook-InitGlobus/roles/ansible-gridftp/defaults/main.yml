@@ -1,0 +1,58 @@
+---
+gridftp_mode: server
+gridftp_repo_rpm_url: http://toolkit.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo-latest.noarch.rpm
+gridftp_instances: 10
+
+# Modes of operation
+gridftp_threads: 0
+
+# Authentication, authorization and security options
+gridftp_allow_anonymous: no
+gridftp_anonymous_user: nobody
+
+# Logging options
+gridftp_log_module: stdio
+gridftp_log_level: error
+gridftp_log_file: /var/log/gridftp.log
+gridftp_log_filemode: 0644
+gridftp_disable_usage_stats: yes
+
+# Network options
+gridftp_port: 2811
+gridftp_tcp_port_range: 50000-51000
+
+# Other options
+gridftp_options: {}
+
+# Certificates
+gridftp_ca_cert_repos: []
+  # - name:
+  #   baseurl:
+  #   gpgkey:          # optional
+  #   packages: []
+gridftp_ca_local_certs: []
+  # - name:
+  #   subject: '/O=Grid/OU=GlobusTest/CN=Globus Simple CA'
+  #   policy: '/O=Grid/OU=GlobusTest/*'
+  #   cert: |
+  #      -----BEGIN CERTIFICATE-----
+  #      ........
+  #      -----END CERTIFICATE-----
+
+gridftp_host_cert:
+gridftp_host_key:
+
+# Mappings
+gridftp_mappings: []
+  # - ln: vagrant
+  #   dn: '/O=Grid/OU=GlobusTest/CN=vagrant'
+
+# Directory restrictions
+gridftp_restrict_directories: []
+gridftp_restrict_homedirs: yes
+
+# UberFTP
+gridftp_uberftp: yes
+
+# Fetch-crl
+gridftp_fetchcrl: yes
