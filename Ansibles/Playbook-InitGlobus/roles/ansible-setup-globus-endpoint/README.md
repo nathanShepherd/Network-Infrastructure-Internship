@@ -1,5 +1,5 @@
 # Install/Authenticate/Deploy Globus Endpoint
-(Following Admin Install Guide)[toolkit.globus.org/toolkit/docs/latest-stable/admin/install/]
+[Following Admin Install Guide](toolkit.globus.org/toolkit/docs/latest-stable/admin/install/)
 
 ## Prerequisites
 ```
@@ -21,17 +21,16 @@ Host credentials must:
 
 ### There are 2 options
 #### 1. Request a certificate from an existing CA
-```
 [how-to](http://toolkit.globus.org/toolkit/docs/latest-stable/gsic/admin/index.html#gsic-configuring)
-```
+
 #### 2. SimpleCA
-This wrapper around OpenSSL CA should come installed with GlobusToolkit. Otherwise, (install SimpleCA)[http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#gtadmin-simpleca]
+This wrapper around OpenSSL CA should come installed with GlobusToolkit. Otherwise, [install SimpleCA](http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#gtadmin-simpleca)
 
 [Install SimpleCA](http://toolkit.globus.org/toolkit/docs/latest-stable/admin/install/appendix.html#simpleca-admin-installing)
 ```
 sudo yum install globus-simple-ca globus-gsi-cert-utils-progs
 ```
-[Setup Host Credentials](from http://grid.ncsa.illinois.edu/myproxy/fromscratch.html#simpleca_setup)
+[Setup Host Credentials](http://grid.ncsa.illinois.edu/myproxy/fromscratch.html#simpleca_setup)
 
 Request a certificate for localhost
 ```
@@ -82,7 +81,7 @@ $ grid-cert-info -subject
 ```
 STDOUT:
 /O=Grid/OU=GlobusTest/OU=simpleCA-elephant.globus.org/CN=Globus User
-```
+
 ```
 $ id -un
 ```
