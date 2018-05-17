@@ -1,11 +1,12 @@
 # Install/Authenticate and Deploy a Globus Endpoint
-This role allow the user rapid deployment of Globus Connect Server. Globus is popular implimentation of GridFTP that already has many clusters around the world.
+This role allow the user to rapidly deploy a Globus Connect Server. Globus is popular implimentation of GridFTP that already has many clusters around the world.
 
 **Globus self endorsment:**
 Globus allows you, as a resource provider, to easily offer reliable, secure, high-performance research data management capabilities to your users and their collaborators, directly from your own storage. Globus is software-as-a-service (SaaS), enabled by the cloud and designed to let users manage their research files, regardless of number and size, as effortlessly as they manage their photos with popular cloud-based services. Globus lets you provide authorized users with web, command line, and REST interfaces for listing, transferring, replicating, and sharing directories and files on your Globus-connected storage resources. 
 
 # How to setup a [Globus Connect Server](https://docs.globus.org/globus-connect-server-installation-guide/)
-TODO: [Configure Globus Connect Server](https://docs.globus.org/globus-connect-server-installation-guide/#globus_connect_server_configuration)
+
+##TODO: [Configure Globus Connect Server](https://docs.globus.org/globus-connect-server-installation-guide/#globus_connect_server_configuration)
 
 ## TODO [Open TCP Ports](https://docs.globus.org/globus-connect-server-installation-guide/#test_basic_endpoint_functionality)
 

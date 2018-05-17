@@ -1,11 +1,9 @@
 ---
-- name: Install globus, globusconnectpersonal, and setup an endpoint on host
+- name: Install globus, Globus Connect Server, and deplay an endpoint on host
   hosts: localhost
   remote_user: root
 
   roles:
-    #- InitializeGlobusEndpoint
-    - ansible-simpleca
-    - ansible-gridftp
+    - ansible-setup-globus-endpoint
 
 #?
