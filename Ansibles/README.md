@@ -6,6 +6,15 @@ Roles allow more than just tasks to be packaged together and can include variabl
 sudo yum install ansible
 ```
 
+#### Setup an Ansible Inventory (hostgroup)
+Run server configuration remotely
+Use Ed's example playbook perfSonar 
+Take roles out subdirectory and make it's own repo
+Push repo to ansible galaxy 
+Get the role and install at nateshep/.ansible
+
+
+
 ### Initialize a New Role
 ```
 $ mkdir ansible-role-NEW_ROLE
