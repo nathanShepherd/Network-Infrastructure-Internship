@@ -13,6 +13,7 @@ sudo yum install ansible
 - Push repo to ansible galaxy 
 - Get the role and install at nateshep/.ansible
 
+#### Configure a Server on EC2 remotely via ssh
 
 
 ### Initialize a New Role
