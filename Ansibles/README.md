@@ -7,11 +7,11 @@ sudo yum install ansible
 ```
 
 #### Setup an Ansible Inventory (hostgroup)
-Run server configuration remotely
-Use Ed's example playbook perfSonar 
-Take roles out subdirectory and make it's own repo
-Push repo to ansible galaxy 
-Get the role and install at nateshep/.ansible
+- Run server configuration remotely
+- Use Ed's example playbook perfSonar 
+- Take roles out subdirectory and make it's own repo
+- Push repo to ansible galaxy 
+- Get the role and install at nateshep/.ansible
 
 
 
