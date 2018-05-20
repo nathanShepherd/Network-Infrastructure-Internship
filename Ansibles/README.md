@@ -5,6 +5,10 @@ Roles allow more than just tasks to be packaged together and can include variabl
 ```
 sudo yum install ansible
 ```
+Alternatively, Ansible can be installed via pip
+```
+sudo pip install ansible
+```
 
 #### Setup an Ansible Inventory (hostgroup)
 - Run server configuration remotely
